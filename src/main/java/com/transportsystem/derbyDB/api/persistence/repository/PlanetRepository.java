@@ -4,9 +4,18 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * The interface Planet repository.
+ */
 @Repository
 public interface PlanetRepository extends CrudRepository<Planet,Integer> {
 
-    @Query(value = "select planet_name from Planet where planet_node = ?1")
-    String findPlanetNameByPlanetId(String planet_node);
+    /**
+     * Find planet name by planet node string.
+     *
+     * @param planetNode the planet node
+     * @return the string
+     */
+    @Query(value = "select planetName from Planet where planetNode = ?1")
+   String findPlanetNameByPlanetNode(String planetNode);
 }

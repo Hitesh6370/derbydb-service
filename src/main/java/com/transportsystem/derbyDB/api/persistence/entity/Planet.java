@@ -4,11 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+/**
+ * The type Planet.
+ */
 @Entity
 @Data
 @AllArgsConstructor
@@ -19,7 +19,11 @@ public class Planet {
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     private int id;
-    private String planet_node;
-    private String planet_name;
+
+    @Column(name="planet_node")
+    private String planetNode;
+
+    @Column(name="planet_name")
+    private String planetName;
 
 }

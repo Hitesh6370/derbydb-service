@@ -14,13 +14,23 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Db service.
+ */
 @Service
 public class DBServiceImpl implements DBService {
 
-    private PlanetRepository planetRepository;
-    private RouteRepository routeRepository;
-    private TrafficRepository trafficRepository;
+    private final PlanetRepository planetRepository;
+    private final RouteRepository routeRepository;
+    private final TrafficRepository trafficRepository;
 
+    /**
+     * Instantiates a new Db service.
+     *
+     * @param planetRepository  the planet repository
+     * @param routeRepository   the route repository
+     * @param trafficRepository the traffic repository
+     */
     @Autowired
     public DBServiceImpl(final PlanetRepository planetRepository, final RouteRepository routeRepository, final TrafficRepository trafficRepository)
     {
@@ -40,7 +50,7 @@ public class DBServiceImpl implements DBService {
     @Override
     public String getPlanetName(String pid)
     {
-        return planetRepository.findPlanetNameByPlanetId(pid);
+        return planetRepository.findPlanetNameByPlanetNode(pid);
     }
 
     @Override
@@ -53,14 +63,14 @@ public class DBServiceImpl implements DBService {
         for (Route route : routes)
         {
             RouteDetail routeDetail = new RouteDetail();
-            routeDetail.setRoute_id(route.getRoute_id());
-            routeDetail.setPlanet_origin_id(route.getPlanet_origin());
-            routeDetail.setPlanet_origin_name(getPlanetName(route.getPlanet_origin()));
-            routeDetail.setPlanet_destination_id(route.getPlanet_destination());
-            routeDetail.setPlanet_destination_name(getPlanetName(route.getPlanet_destination()));
-            routeDetail.setDistance(route.getDistance());
-            Traffic traffic = trafficRepository.findByRouteid(route.getRoute_id());
-            routeDetail.setTraffic_delay(traffic.getTraffic_delay());
+            routeDetail.setRouteId(route.getRouteId());
+            routeDetail.setPlanetOriginNode(route.getPlanetOriginNode());
+            routeDetail.setPlanetOriginName(getPlanetName(route.getPlanetOriginNode()));
+            routeDetail.setPlanetDestinationNode(route.getPlanetDestinationNode());
+            routeDetail.setPlanetDestinationName(getPlanetName(route.getPlanetDestinationNode()));
+            routeDetail.setDistance(route.getDuration());
+            Traffic traffic = trafficRepository.findByRouteId(route.getRouteId());
+            routeDetail.setTrafficDelay(traffic.getTrafficDelay());
             routeDetails.add(routeDetail);
         }
         return routeDetails;

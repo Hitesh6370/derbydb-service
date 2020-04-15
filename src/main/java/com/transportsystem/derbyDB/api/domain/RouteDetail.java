@@ -5,18 +5,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * The type Route detail.
+ */
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class RouteDetail {
 
-    private int route_id;
-    private String planet_origin_id;
-    private String planet_origin_name;
-    private String planet_destination_id;
-    private String planet_destination_name;
+    private int routeId;
+    private String planetOriginNode;
+    private String planetOriginName;
+    private String planetDestinationNode;
+    private String planetDestinationName;
     private double distance;
-    private double traffic_delay;
+    private double trafficDelay;
+
+
 
 }

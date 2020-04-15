@@ -14,22 +14,33 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+/**
+ * The type Excel read.
+ */
 public class ExcelRead {
 
-    public FileInputStream fis = null;
-    public List<Planet> planetList = null;
-
-     public ExcelRead(String filename) {
+    /**
+     * Instantiates a new Excel read.
+     *
+     * @param filename the filename
+     */
+    public ExcelRead(String filename) {
         try {
-            fis = new FileInputStream(filename);
+            FileInputStream fis = new FileInputStream(filename);
             XSSFWorkbook workbook = new XSSFWorkbook(fis);
-            planetList = readPlanetData(workbook.getSheetAt(0));
+            List<Planet> planetList = readPlanetData(workbook.getSheetAt(0));
             fis.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Read planet data list.
+     *
+     * @param sheet the sheet
+     * @return the list
+     */
     public List<Planet> readPlanetData(XSSFSheet sheet) {
         ArrayList<Planet> planets = new ArrayList<>();
         Iterator<Row> row = sheet.rowIterator();
@@ -42,15 +53,21 @@ public class ExcelRead {
             while (cell.hasNext()) {
                 Cell c = cell.next();
                 if (0 == c.getColumnIndex())
-                    planet.setPlanet_node(c.getStringCellValue());
+                    planet.setPlanetNode(c.getStringCellValue());
                 else if (1 == c.getColumnIndex())
-                    planet.setPlanet_name(c.getStringCellValue());
+                    planet.setPlanetName(c.getStringCellValue());
             }
             planets.add(planet);
         }
         return planets;
     }
 
+    /**
+     * Read routes data list.
+     *
+     * @param sheet the sheet
+     * @return the list
+     */
     public List<Route> readRoutesData(XSSFSheet sheet) {
         ArrayList<Route> routes = new ArrayList<>();
         Iterator<Row> row = sheet.rowIterator();
@@ -63,19 +80,25 @@ public class ExcelRead {
             while (cell.hasNext()) {
                 Cell c = cell.next();
                 if (0 == c.getColumnIndex())
-                    route.setRoute_id((int)c.getNumericCellValue ());
+                    route.setRouteId((int)c.getNumericCellValue ());
                 else if (1 == c.getColumnIndex())
-                    route.setPlanet_origin(c.getStringCellValue());
+                    route.setPlanetOriginNode(c.getStringCellValue());
                 else if (2 == c.getColumnIndex())
-                    route.setPlanet_destination(c.getStringCellValue());
+                    route.setPlanetDestinationNode(c.getStringCellValue());
                 else if (3 == c.getColumnIndex())
-                    route.setDistance(c.getNumericCellValue());
+                    route.setDuration(c.getNumericCellValue());
             }
             routes.add(route);
         }
         return routes;
     }
 
+    /**
+     * Read traffic data list.
+     *
+     * @param sheet the sheet
+     * @return the list
+     */
     public List<Traffic> readTrafficData(XSSFSheet sheet) {
         ArrayList<Traffic> traffic = new ArrayList<>();
         Iterator<Row> row = sheet.rowIterator();
@@ -88,13 +111,13 @@ public class ExcelRead {
             while (cell.hasNext()) {
                 Cell c = cell.next();
                 if (0 == c.getColumnIndex())
-                    t.setRouteid((int)c.getNumericCellValue());
+                    t.setRouteId((int)c.getNumericCellValue());
                 else if (1 == c.getColumnIndex())
-                    t.setPlanet_origin(c.getStringCellValue());
+                    t.setPlanetOriginNode(c.getStringCellValue());
                 else if (2 == c.getColumnIndex())
-                    t.setPlanet_destination(c.getStringCellValue());
+                    t.setPlanetDestinationNode(c.getStringCellValue());
                 else if (3 == c.getColumnIndex())
-                    t.setTraffic_delay(c.getNumericCellValue());
+                    t.setTrafficDelay(c.getNumericCellValue());
             }
             traffic.add(t);
         }

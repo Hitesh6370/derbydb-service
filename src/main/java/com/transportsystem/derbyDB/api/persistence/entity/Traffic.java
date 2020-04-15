@@ -4,6 +4,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
+/**
+ * The type Traffic.
+ */
 @Entity
 @Data
 @AllArgsConstructor
@@ -13,9 +16,17 @@ public class Traffic {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private int routeid;
-    private String planet_origin;
-    private String planet_destination;
-    private double traffic_delay;
+
+    @Column(name="route_id")
+    private int routeId;
+
+    @Column(name="planet_origin")
+    private String planetOriginNode;
+
+    @Column(name="planet_destination")
+    private String planetDestinationNode;
+
+    @Column(name="traffic_delay")
+    private double trafficDelay;
 
 }

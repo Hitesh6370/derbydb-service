@@ -23,6 +23,9 @@ import org.springframework.web.filter.CorsFilter;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+/**
+ * The type Application config.
+ */
 @Setter
 @Getter
 @Configuration
@@ -35,12 +38,17 @@ public class ApplicationConfig {
     @Autowired
     private DBService DBService;
 
+    /**
+     * On application event.
+     *
+     * @param event the event
+     */
     @EventListener
     public void onApplicationEvent(ApplicationReadyEvent event) {
         ExcelRead excelRead = new ExcelRead(filename);
-        FileInputStream fis = null;
+
         try {
-            fis = new FileInputStream(filename);
+            FileInputStream fis = new FileInputStream(filename);
             XSSFWorkbook workbook = new XSSFWorkbook(fis);
             DBService.savePlanetData(excelRead.readPlanetData(workbook.getSheetAt(0)));
             DBService.saveRoutsData(excelRead.readRoutesData(workbook.getSheetAt(1)));
@@ -51,6 +59,11 @@ public class ApplicationConfig {
         }
     }
 
+    /**
+     * Custom open api open api.
+     *
+     * @return the open api
+     */
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
@@ -59,6 +72,11 @@ public class ApplicationConfig {
                         "Spring Boot based rest api service for transport system to connect with Database"));
     }
 
+    /**
+     * Cors filter filter registration bean.
+     *
+     * @return the filter registration bean
+     */
     @Bean
     public FilterRegistrationBean corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

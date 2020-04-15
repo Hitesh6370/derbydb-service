@@ -14,6 +14,9 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+/**
+ * The type Db controller.
+ */
 @RestController
 @RequestMapping(value = "/api",
         produces = {
@@ -22,8 +25,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Tag(name = "transport system database", description = "The Transport System database API")
 public class DBController {
 
-    private DBService DBService;
+    private final DBService DBService;
 
+    /**
+     * Instantiates a new Db controller.
+     *
+     * @param DBService the db service
+     */
     @Autowired
     public DBController(final DBService DBService)
     {
@@ -31,6 +39,11 @@ public class DBController {
     }
 
 
+    /**
+     * Test string.
+     *
+     * @return the string
+     */
     @RequestMapping(value = "/test", method = GET, produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
@@ -39,6 +52,11 @@ public class DBController {
         return "all good";
     }
 
+    /**
+     * Get planets list.
+     *
+     * @return the list
+     */
     @Operation(summary = "Planet list", description = "Find List of all planets which is present in system ", tags = { "planets" })
     @RequestMapping(value = "/planets", method = GET)
     @ResponseStatus(HttpStatus.OK)
@@ -48,6 +66,11 @@ public class DBController {
         return DBService.listAllPlanet();
     }
 
+    /**
+     * Get details list.
+     *
+     * @return the list
+     */
     @Operation(summary = "Route Detail", description = "Find List of all routes along with distance and traffic delay  ", tags = { "details" })
     @RequestMapping(value = "/details", method = GET)
     @ResponseStatus(HttpStatus.OK)
