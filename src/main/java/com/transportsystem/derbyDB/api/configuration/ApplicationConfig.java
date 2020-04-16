@@ -69,7 +69,8 @@ public class ApplicationConfig {
         return new OpenAPI()
                 .components(new Components())
                 .info(new Info().title("Derby DB API").description(
-                        "Spring Boot based rest api service for transport system to connect with Database"));
+                        "Spring Boot based rest api service for transport system to connect with Database")
+                        .version("v1"));
     }
 
     /**

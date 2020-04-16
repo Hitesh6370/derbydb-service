@@ -12,13 +12,14 @@
 	<artifactId>derbyDB.api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>derbyDB.api</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Spring boot project for CRUD operation</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<apache.poi.version>4.0.1</apache.poi.version>
+		<openapi.doc.version>1.3.2</openapi.doc.version>
 	</properties>
 
 	<dependencies>
@@ -53,7 +54,7 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.2.32</version>
+			<version>${openapi.doc.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

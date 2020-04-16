@@ -1,9 +1,9 @@
 openapi: 3.0.1
-info: 
+info:
   title: Derby DB API
   description: Spring Boot based rest api service for transport system to connect
     with Database
-  version: 1.0.0
+  version: v1
 servers:
 - url: http://localhost:8086
   description: Generated server url
@@ -60,21 +60,21 @@ components:
     RouteDetail:
       type: object
       properties:
-        route_id:
+        routeId:
           type: integer
           format: int32
-        planet_origin_id:
+        planetOriginNode:
           type: string
-        planet_origin_name:
+        planetOriginName:
           type: string
-        planet_destination_id:
+        planetDestinationNode:
           type: string
-        planet_destination_name:
+        planetDestinationName:
           type: string
         distance:
           type: number
           format: double
-        traffic_delay:
+        trafficDelay:
           type: number
           format: double
     Planet:
@@ -83,7 +83,7 @@ components:
         id:
           type: integer
           format: int32
-        planet_node:
+        planetNode:
           type: string
-        planet_name:
+        planetName:
           type: string
